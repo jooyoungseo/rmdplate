@@ -28,4 +28,6 @@ Imports:
     tidyr,
     xaringan,
     fs,
-    lazyeval
+    lazyeval,
+    callr,
+    methods

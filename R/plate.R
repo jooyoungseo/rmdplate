@@ -145,18 +145,18 @@ break
 }
 }
 
-                    editor <- getOption("editor")
+#                    editor <- getOption("editor")
 
-message(paste0("Your default text editor is set to: ", 
-                      editor, ". Do you want to keep using it? "))
+#message(paste0("Your default text editor is set to: ", 
+#                      editor, ". Do you want to keep using it? "))
 
-                    editor_option <- base::tolower(readLines(n = 1))
+#                    editor_option <- base::tolower(readLines(n = 1))
 
-if(!(editor_option %in% c("", "yes", "true", "t"))) {
-                      message("Choose your preferable text editor: ")
-                      editor_path <- enc2native(file.choose())
-                      options(editor = editor_path)
-                    }
+#if(!(editor_option %in% c("", "yes", "true", "t"))) {
+#                      message("Choose your preferable text editor: ")
+#                      editor_path <- enc2native(file.choose())
+#                      options(editor = editor_path)
+#                    }
 
 target_pkg <- templ[templ$id == user_input_templ, ]$package
 
@@ -172,13 +172,20 @@ message("Do you want to render the Rmd file? (Press \"B\" to go back to the prev
 
 #file <- base::basename(file)
 
-rendered_output <- lapply(rmarkdown::all_output_formats(file), function(x) {if(grepl("^(pagedown|xaringan|posterdown)", x)) {xaringan::infinite_moon_reader(file); message("Save your Rmd file; then the browser will automatically update its changed content accordingly."); return("servr")} else {utils::browseURL(rmarkdown::render(input = file, output_format = x)); return(x)}
-})
+#rendered_output <- lapply(rmarkdown::all_output_formats(file), function(x) {if(grepl("^(pagedown|xaringan|posterdown)", x)) {xaringan::infinite_moon_reader(file); message("Save your Rmd file; then the browser will automatically update its changed content accordingly."); return("servr")} else {utils::browseURL(rmarkdown::render(input = file, output_format = x)); return(x)}})
 
-if(unlist(rendered_output) %in% c("servr")) {
-message("Good bye!")
-                        return(invisible())
-}
+
+#if(unlist(rendered_output) %in% c("servr")) {
+#message("Good bye!")
+#                        return(invisible())
+#}
+
+render_all(file)
+#render_all_separately <- function(...) {callr::r(
+#    function(...) rmdplate::render_all(..., envir = globalenv()), args = list(...), show = TRUE)
+#}
+
+#render_all_separately(file)
 
 #                        setwd("..")
                       } 
